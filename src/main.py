@@ -1,10 +1,11 @@
+from borrower import Borrower
 from library import Library
 from book import Book
 def main():
     library = Library()
-    library.add_book(Book("The Catcher in the Rye", "6789345567333", "J.D. Salinger", 1)) 
-    library.add_book(Book("1984", "6789345567333", "George Orwell", 2))
-
+    library.add_book(Book("The Catcher in the Rye","J.D. Salinger", "56487", 1)) 
+    library.add_book(Book("Python Basics", "Guido van Rossum", "101", 1))
+    library.borrowers.append(Borrower("Sai Uday", "9876543210", "M101"))
     while True:
         print("\n#UPDATED:- Library Management System")
         print("1. Add Book")
@@ -47,7 +48,7 @@ def main():
             else:
                 print("Failed to return book. Check membership ID or ISBN.")
         elif choice == '4':
-            print("\nAll Books in Library:")
+            print("\n All Books in Library:")
             library.display_books()
         else:
             print("Invalid choice. Please try again.")

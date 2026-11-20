@@ -7,6 +7,7 @@ class Library:
 
     def add_book(self, book):
         self.books.append(book)
+        
 
     def borrow_book(self, membership_id, isbn):
         # Find borrower and book, check availability
@@ -18,4 +19,19 @@ class Library:
                         due_date = datetime.now() + timedelta(days=14)
                         borrower.borrowed_books.append((book, due_date))
                         return True
-        return False
+                    
+    def display_books(self):
+        if not self.books:
+            print("No books available in the library.")
+            return
+        for book in self.books:
+            print(f"Title: {book.title}, Author: {book.author}, ISBN: {book.isbn}, Quantity: {book.quantity}")
+    def return_book(self, membership_id, isbn):
+        for borrower in self.borrowers:
+            if borrower.membership_id == membership_id:
+                for item in borrower.borrowed_books:
+                    if item[0].isbn == isbn:
+                        borrower.borrowed_books.remove(item)
+                        item[0].quantity += 1
+                        return True
+        return False        
